@@ -27,4 +27,3 @@ jobs:
         title: "Releases"
         files: |
           LICENSE.txt
-          Release_Notes.txt
