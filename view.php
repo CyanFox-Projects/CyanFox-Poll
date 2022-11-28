@@ -108,6 +108,10 @@ if (isset($_GET['id'])) {
 
         function loadDataTable() {
             $('#table').DataTable({
+                colReader: {
+                    realtime: true,
+                },
+                responsive: true,
                 destroy: true,
                 paging: true,
                 ordering: true,

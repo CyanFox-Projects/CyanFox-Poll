@@ -1,11 +1,10 @@
 
-/* Source Code icon stuff */
-.source_code_div i {
+.icon_div i {
     position: absolute;
     font-size: 25px;
 }
 
-.source_code_div {
+.icon_div {
     width: 100%;
     margin-bottom: 10px;
 }

@@ -20,8 +20,14 @@ if (isset($_GET['id'])) {
                 $poll_answers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 if (isset($_GET['change'])) {
-                    if ($_GET['change'] == '1') {
+                    if ($_GET['change'] == 'true') {
 
+                       /* if (isset($_GET['use_max_answers'])) {
+
+                            $stmt = $pdo->prepare("UPDATE `polls` SET `withmax`='" . $_GET['use_max_answers'] . "' WHERE id = ?");
+                            $stmt->execute([$_GET['id']]);
+                            header('Location: edit.php?id=' . $_GET['id'] . '&secret=' . $_GET['secret']);
+                        }*/
                         if (isset($_GET['title'])) {
 
                             $stmt = $pdo->prepare("UPDATE `polls` SET `title`='" . $_GET['title'] . "' WHERE id = ?");
@@ -38,7 +44,13 @@ if (isset($_GET['id'])) {
 
                             $stmt = $pdo->prepare("UPDATE `polls` SET `admin_id`='" . $_GET['admin'] . "' WHERE id = ?");
                             $stmt->execute([$_GET['id']]);
-                            header('Location: edit.php?id=' . $_GET['id'] . '&secret=' . $_GET['admin']);
+                            header('Location: edit.php?id=' . $_GET['id'] . '&secret=' . $_GET['secret']);
+                        }
+                        if (isset($_GET['email'])) {
+
+                            $stmt = $pdo->prepare("UPDATE `polls` SET `email`='" . $_GET['email'] . "' WHERE id = ?");
+                            $stmt->execute([$_GET['id']]);
+                            header('Location: edit.php?id=' . $_GET['id'] . '&secret=' . $_GET['secret']);
                         }
                     }
                 }
@@ -97,7 +109,7 @@ if (isset($_GET['id'])) {
 
 <?= template_header('Admin Panel von ' . $poll['title']) ?>
 
-<script src="assets/js/edit.js"></script>
+<script src="assets/js/sites/edit.js"></script>
 
 <div class="content poll-result">
     <h2><?= $poll['title'] ?></h2>
@@ -136,7 +148,7 @@ if (isset($_GET['id'])) {
             margin: 4px 2px;
             cursor: pointer;
             border-radius: 4px;
-            background-color: darkgreen;
+            background-color: #4379e5;
             font-weight: bold;
         }
 
@@ -164,33 +176,47 @@ if (isset($_GET['id'])) {
     <br>
 
     <br>
-    <a style="color: black"></span><strong>Titel ändern: </strong></a>
-    <br>
-    <input onclick="inputText('<?= $_GET['id'] ?>', 'title')" type="button"
-           class="button" value="Ändern" style="width: 100px; height: 40px; background-color: yellowgreen">
-    <input type="text" value="<?= $poll['title'] ?>" disabled>
+    <div style="display: table-row">
+        <a style="color: black"></span><strong>Titel ändern: </strong></a>
+        <br>
+        <input onclick="inputText('<?= $_GET['id'] ?>', '<?= $_GET['secret'] ?>', 'title')" type="button"
+               class="button" value="Ändern" style="width: 100px; height: 40px; background-color: #4379e5">
+        <input type="text" value="<?= $poll['title'] ?>" disabled>
 
-    <br>
-    <br>
+        <br>
+        <br>
 
-    <a style="color: black"></span><strong>Beschreibung ändern: </strong></a>
-    <br>
-    <input onclick="inputText('<?= $_GET['id'] ?>', 'description')"
-           type="button" class="button" value="Ändern"
-           style="width: 100px; height: 40px; background-color: yellowgreen">
-    <input type="text" value="<?= $poll['description'] ?>" disabled>
+        <a style="color: black"></span><strong>Beschreibung ändern: </strong></a>
+        <br>
+        <input onclick="inputText('<?= $_GET['id'] ?>', '<?= $_GET['secret'] ?>', 'description')"
+               type="button" class="button" value="Ändern"
+               style="width: 100px; height: 40px; background-color: #4379e5">
+        <input type="text" value="<?= $poll['description'] ?>" disabled>
 
-    <br>
-    <br>
+        <br>
+        <br>
 
 
-    <a style="color: black"></span><strong>Admin Secret ändern: </strong></a>
-    <br>
-    <input onclick="inputText('<?= $_GET['id'] ?>', 'admin')"
-           type="button" class="button" value="Ändern"
-           style="width: 100px; height: 40px; background-color: yellowgreen">
-    <input type="text" value="<?= $poll['admin_id'] ?>" disabled>
+        <a style="color: black"></span><strong>Admin Secret ändern: </strong></a>
+        <br>
+        <input onclick="inputText('<?= $_GET['id'] ?>', '<?= $_GET['secret'] ?>', 'admin')"
+               type="button" class="button" value="Ändern"
+               style="width: 100px; height: 40px; background-color: #4379e5">
+        <input type="text" value="<?= $poll['admin_id'] ?>" disabled>
 
+        <br>
+        <br>
+
+        <a style="color: black;"></span><strong>E-Mail ändern: </strong></a>
+        <br>
+        <input onclick="inputText('<?= $_GET['id'] ?>', '<?= $_GET['secret'] ?>', 'email')"
+               type="button" class="button" value="Ändern"
+               style="width: 100px; height: 40px; background-color: #4379e5">
+        <input type="text" value="<?= $poll['email'] ?>" disabled>
+
+        <br>
+        <br>
+    </div>
     <br>
     <br>
     <br>
@@ -223,12 +249,21 @@ if (isset($_GET['id'])) {
                             $stmt->execute([$_GET['id']]);
                             $poll_answer_votes = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                            $edit_max = "<a href='#' onclick='changeMax(`" . $poll_answer_votes['title'] . "`)' <i class='fas fa-pencil-alt' style='color: gray'></i></a>";
+
+                            $stmt = $pdo->prepare('SELECT * FROM polls WHERE id = ?');
+                            $stmt->execute([$_GET['id']]);
+                            $poll = $stmt->fetch(PDO::FETCH_ASSOC);
+                            $edit_max = "";
+
+                            if($poll['withmax'] == "true"){
+                                $edit_max = "<a href='#' onclick='changeMax(`" . $poll_answer_votes['title'] . "`)' <i class='fas fa-pencil-alt' style='color: gray'></i></a>";
+                            }
                             echo '
 <tr>
 <th scope="row">' . $poll_answer['title'] . '<br></th>
 <th scope="row">' . $poll_answer_votes['voted_votes'] . '<br></th>
 <th scope="row">' . $poll_answer_votes['max_votes'] . '<br></th>
+
 <th scope="row">' . $del . ' ' . $edit_max . '<br></th>
 </tr>
 ';

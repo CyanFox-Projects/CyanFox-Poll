@@ -1,5 +1,10 @@
 $(document).ready(function () {
     $('#table').DataTable({
+        colReader: {
+            realtime: true,
+        },
+        responsive: true,
+        destroy: true,
         paging: true,
         ordering: true,
         info: true,
@@ -20,6 +25,9 @@ function changeMax(poll_name) {
         confirmButtonText: 'Ändern!',
         cancelButtonText: 'Abbrechen',
         preConfirm: (newMax) => {
+            if (!newMax) {
+                Swal.showValidationMessage('<i class="fa fa-info-circle"></i> Bitte gebe eine Zahl an!')
+            }
             Swal.fire(
                 'Geändert!',
                 'Maximale Stimmen geändert.',
@@ -32,7 +40,15 @@ function changeMax(poll_name) {
 
 }
 
-function inputText(poll_id, type) {
+/*function useMaxAnswers(poll_id, secret, value) {
+    if(value) {
+        window.location.href = "edit.php?id=" + poll_id + "&secret=" + secret + "&change=true&use_max_answers=true";
+    }else{
+        window.location.href = "edit.php?id=" + poll_id + "&secret=" + secret + "&change=true&use_max_answers=false";
+    }
+}*/
+
+function inputText(poll_id, secret, type) {
 
     if (type === "title") {
         Swal.fire({
@@ -51,7 +67,7 @@ function inputText(poll_id, type) {
                     'Titel geändert.',
                     'success'
                 ).then((result) => {
-                    window.location.href = "edit.php?id=" + poll_id + "&secret=<?= $_GET['secret'] ?>&change=1&title=" + input;
+                    window.location.href = "edit.php?id=" + poll_id + "&secret=" + secret + "&change=true&title=" + input;
                 })
             }
         })
@@ -73,7 +89,7 @@ function inputText(poll_id, type) {
                     'Beschreibung geändert.',
                     'success'
                 ).then((result) => {
-                    window.location.href = "edit.php?id=" + poll_id + "&secret=<?= $_GET['secret'] ?>&change=1&description=" + input;
+                    window.location.href = "edit.php?id=" + poll_id + "&secret=" + secret + "&change=true&description=" + input;
                 })
             }
         })
@@ -95,13 +111,38 @@ function inputText(poll_id, type) {
                     'Secret geändert.',
                     'success'
                 ).then((result) => {
-                    window.location.href = "edit.php?id=" + poll_id + "&secret=<?= $_GET['secret'] ?>&change=1&admin=" + input;
+                    window.location.href = "edit.php?id=" + poll_id + "&secret=" + secret + "&change=true&admin=" + input;
+                })
+            }
+        })
+
+    } else if (type === "email") {
+        Swal.fire({
+            title: 'E-Mail ändern',
+            text: "Gebe eine neue E-Mail Addresse an!",
+            icon: 'info',
+            input: 'email',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ändern!',
+            cancelButtonText: 'Abbrechen',
+            preConfirm: (input) => {
+                if (!input) {
+                    Swal.showValidationMessage('<i class="fa fa-info-circle"></i> Bitte gebe eine E-Mail Addresse an!')
+                }
+                Swal.fire(
+                    'Geändert!',
+                    'E-Mail geändert.',
+                    'success'
+                ).then((result) => {
+                    window.location.href = "edit.php?id=" + poll_id + "&secret=" + secret + "&change=true&email=" + input;
                 })
             }
         })
 
     } else {
-        console.log("Wrong type");
+        console.log("Provide a valid type!");
     }
 }
 

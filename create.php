@@ -26,10 +26,11 @@ if (!empty($_POST)) {
 
         $title = isset($_POST['title']) ? $_POST['title'] : '';
         $description = isset($_POST['description']) ? $_POST['description'] : '';
+        $email = isset($_POST['email']) ? $_POST['email'] : '';
         $answers = $_POST['answers'];
 
         if (isset($_POST['useMaxAnswers'])) {
-            $stmt = $pdo->prepare('INSERT INTO polls (title, description, admin_id, withmax) VALUES (?, ?, "' . $admin . '", "true")');
+            $stmt = $pdo->prepare('INSERT INTO polls (title, description, admin_id, withmax, email) VALUES (?, ?, "' . $admin . '", "true", "' . $email . '")');
             $stmt->execute([$title, $description]);
             $poll_id = $pdo->lastInsertId();
 
@@ -45,7 +46,7 @@ if (!empty($_POST)) {
 
             header("Location: admin.php?id=" . $poll_id . "&secret=" . $admin);
         } else {
-            $stmt = $pdo->prepare('INSERT INTO polls (title, description, admin_id, withmax) VALUES (?, ?, "' . $admin . '", "false")');
+            $stmt = $pdo->prepare('INSERT INTO polls (title, description, admin_id, withmax, email) VALUES (?, ?, "' . $admin . '", "false", "' . $email . '")');
             $stmt->execute([$title, $description]);
             $poll_id = $pdo->lastInsertId();
             $i = -1;
@@ -57,15 +58,19 @@ if (!empty($_POST)) {
                 $stmt->execute([$poll_id, $answer]);
             }
 
+            if(!$email == ""){
+                sendEmail($email, "Umfrage erstellt", "lenny@petschl.org", "Deine Umfrage wurde erstellt. Du kannst das Admin-Panel unter folgendem Link finden: https://petschl.org/poll/admin.php?id=" . $poll_id . "&secret=" . $admin);
+
+            }
             header("Location: admin.php?id=" . $poll_id . "&secret=" . $admin);
         }
 
 
     } else {
         echo '<script>SweetAlert.fire(
-            "Capture fehlgeschlagen!",
-            "Bitte fülle das Capture aus!",
-            "info"
+            title: "Capture fehlgeschlagen!",
+            text: "Bitte fülle das Capture aus!",
+            icon: "error"
         )</script>';
     }
 
@@ -75,22 +80,25 @@ if (!empty($_POST)) {
 
 <script src='https://js.hcaptcha.com/1/api.js' async defer></script>
 
-<script src="assets/js/create.js"></script>
+<script src="assets/js/sites/create.js"></script>
 
 <div class="content update">
     <h2>Umfrage erstellen</h2>
     <form id="create_form" action="create.php" method="post">
-        <label for="title">Titel</label>
+        <label for="title">Titel <a style="color: red">*</a></label>
         <input type="text" name="title" id="title" placeholder="Titel der Umfrage" required>
 
         <label for="description">Beschreibung</label>
         <input type="text" name="description" id="description" placeholder="Beschreibung der Umfrage">
 
-        <label for="useMaxAnswers">Maximale antworten nutzen?</label>
+        <label for="email">E-Mail</label>
+        <input type="email" name="email" id="email" placeholder="E-Mail Adresse">
+
+        <label for="useMaxAnswers">Maximale antworten nutzen? <a style="color: red">*</a></label>
         <input style="display: flex; margin-left: -47%" type="checkbox" id="useMaxAnswers" name="useMaxAnswers"
                onclick="check()" checked>
 
-        <label for="answers">Antwort Möglichkeiten</label>
+        <label for="answers">Antwort Möglichkeiten <a style="color: red">*</a></label>
         <div class="answers_div" style="display: flex;">
             <div id="answers_div_option">
                 <input name="answers[0]" id="answers" placeholder="Antwort Möglichkeit" required>
@@ -111,7 +119,8 @@ if (!empty($_POST)) {
 
         <div id="captcha_div" class="h-captcha" data-sitekey="95211084-2579-49d1-8fd4-c611e20a0b90"></div>
         <input id="submit" type="submit" value="Erstellen">
-    </form>
+    </form
+    >
 </div>
 
 <?= template_footer() ?>

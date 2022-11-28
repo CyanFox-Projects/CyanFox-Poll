@@ -2,14 +2,18 @@
 function connect_mysql()
 {
     $DATABASE_HOST = 'localhost';
-    $DATABASE_USER = 'Doodle';
-    $DATABASE_PASS = 'Doodle';
+    $DATABASE_USER = 'cyanfox';
+    $DATABASE_PASS = 'cyanfox';
     $DATABASE_NAME = 'cyanfox-poll';
     try {
         return new PDO('mysql:host=' . $DATABASE_HOST . ';dbname=' . $DATABASE_NAME . ';charset=utf8', $DATABASE_USER, $DATABASE_PASS);
     } catch (PDOException $exception) {
         exit('Failed to connect to database!');
     }
+}
+
+function sendEmail($email, $subject, $from, $message) {
+    mail($email, $subject, $message, "From: " . $from);
 }
 
 function generateRandomString(): string {
@@ -57,9 +61,9 @@ function template_header($title)
 
     <nav class="navtop">
     	<div>
-    		<h1 style="cursor: pointer" onclick="window.location.href = 'index.php'">Umfragen</h1>
-            <a style="font-size: 15px;" href="../impressum.php"><i class="fas fa-info"></i>Impressum</a>
-            <a style="font-size: 15px;" href="../datenschutz.php"><i class="fas fa-info"></i>Datenschutzerklärung</a>
+    		<h1 style="cursor: pointer" onclick="window.location.href = '../index.php'">Umfragen</h1>
+            <a style="font-size: 15px;" href="../privacy/imprint.php"><i class="fas fa-info"></i>Impressum</a>
+            <a style="font-size: 15px;" href="../privacy/privacy.php"><i class="fas fa-info"></i>Datenschutzerklärung</a>
             <a style="font-size: 15px;" href="../report.php"><i class="fas fa-exclamation-circle"></i>Fehler Melden</a>
         </div>
 

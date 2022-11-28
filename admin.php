@@ -48,13 +48,14 @@ if (isset($_GET['id'])) {
 
                         if (isset($_GET['delPoll'])) {
                             $stmt = $pdo->prepare("DELETE FROM polls WHERE id = " . $_GET['id'] . ";");
-                            $stmt->execute([$_GET['id']]);
+                            $stmt->execute();
 
                             $stmt = $pdo->prepare("DELETE FROM poll_answers WHERE poll_id = " . $_GET['id'] . ";");
-                            $stmt->execute([$_GET['id']]);
+                            $stmt->execute();
 
                             $stmt = $pdo->prepare("DELETE FROM poll_vote WHERE poll_id = " . $_GET['id'] . ";");
-                            $stmt->execute([$_GET['id']]);
+                            $stmt->execute();
+
                             header('Location: index.php');
                         }
                     }
