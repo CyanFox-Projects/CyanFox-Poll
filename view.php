@@ -77,7 +77,7 @@ if (isset($_GET['id'])) {
             }
         }
     } else {
-        exit('Eine Umfrage mit dieser ID existiert nicht.');
+        return404();
     }
 } else {
     exit('Es wurde keine ID angegeben.');

@@ -1,6 +1,5 @@
 <?php
-function connect_mysql()
-{
+function connect_mysql() {
     $DATABASE_HOST = 'localhost';
     $DATABASE_USER = 'cyanfox';
     $DATABASE_PASS = 'cyanfox';
@@ -26,8 +25,13 @@ function generateRandomString(): string {
     return $randomString;
 }
 
-function template_header($title)
-{
+function return404() {
+    http_response_code(404);
+    header("Location: assets/error/404.html");
+    die();
+}
+
+function template_header($title) {
     echo <<<EOT
 <!DOCTYPE html>
 <html>
@@ -63,7 +67,7 @@ function template_header($title)
     	<div>
     		<h1 style="cursor: pointer" onclick="window.location.href = '../index.php'">Umfragen</h1>
             <a style="font-size: 15px;" href="../privacy/imprint.php"><i class="fas fa-info"></i>Impressum</a>
-            <a style="font-size: 15px;" href="../privacy/privacy.php"><i class="fas fa-info"></i>Datenschutzerklärung</a>
+            <a style="font-size: 15px;" href="../privacy/privacy.php"><i class="fas fa-info"></i>Datenschutz</a>
             <a style="font-size: 15px;" href="../report.php"><i class="fas fa-exclamation-circle"></i>Fehler Melden</a>
         </div>
 

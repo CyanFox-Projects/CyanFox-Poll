@@ -61,14 +61,14 @@ if (isset($_GET['id'])) {
                     }
                 }
             } else {
-                exit('Eine Umfrage mit dieser ID existiert nicht. <a href="index.php">Startseite</a>');
+                return404();
             }
         } else {
-            exit('Eine Umfrage mit dieser ID existiert nicht. <a href="index.php">Startseite</a>');
+            return404();
         }
 
     } else {
-        exit('Eine Umfrage mit dieser ID existiert nicht. <a href="index.php">Startseite</a>');
+        return404();
     }
 } else {
     exit('Keine ID gegeben. <a href="index.php">Startseite</a>');
