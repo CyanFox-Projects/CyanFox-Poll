@@ -65,14 +65,18 @@ if (isset($_GET['id'])) {
                     $stmt->execute([$_GET['id']]);
                     $poll_vote = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                    $stmt = $pdo->prepare(
-                        "UPDATE `poll_answers` SET `poll_id`=" . $_GET['id'] . ",`title`='" . $poll_vote['vote'] . "',
-                                    `voted_votes`= voted_votes - 1 WHERE poll_id = " . $_GET['id'] . " AND title = '" . $poll_vote['vote'] . "';");
-                    $stmt->execute([$_GET['id']]);
-
                     $stmt = $pdo->prepare("DELETE FROM poll_vote WHERE deleteKey = '" . $_GET['deleteKey'] . "';");
                     $stmt->execute([$_GET['id']]);
-                    header('Location: view.php?id=' . $_GET['id']);
+
+                    if($poll['withmax'] == "true"){
+                        $stmt = $pdo->prepare('UPDATE poll_answers SET voted_votes = voted_votes - 1 WHERE poll_id = "' . $_GET['id'] . '"');
+                        $stmt->execute([$_GET['id']]);
+                    }
+
+                    echo "<script>
+                        document.location.href = 'view.php?id=" . $_GET['id'] . "';
+                      
+                        </script>";
                 }
             }
         }

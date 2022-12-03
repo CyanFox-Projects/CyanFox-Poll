@@ -2,7 +2,7 @@
 include 'assets/php/functions.php';
 ?>
 
-<?= template_header('Polls') ?>
+<?= template_header('Umfragen') ?>
 
 
 <link rel="stylesheet" type="text/css" href="assets/css/particle.css">

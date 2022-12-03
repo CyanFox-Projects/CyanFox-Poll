@@ -1,5 +1,6 @@
 <?php
-function connect_mysql() {
+function connect_mysql()
+{
     $DATABASE_HOST = 'localhost';
     $DATABASE_USER = 'cyanfox';
     $DATABASE_PASS = 'cyanfox';
@@ -11,11 +12,8 @@ function connect_mysql() {
     }
 }
 
-function sendEmail($email, $subject, $from, $message) {
-    mail($email, $subject, $message, "From: " . $from);
-}
-
-function generateRandomString(): string {
+function generateRandomString(): string
+{
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
     $randomString = '';
@@ -25,13 +23,18 @@ function generateRandomString(): string {
     return $randomString;
 }
 
-function return404() {
+function return404()
+{
     http_response_code(404);
     header("Location: assets/error/404.html");
     die();
 }
 
-function template_header($title) {
+function template_header($title)
+{
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
     echo <<<EOT
 <!DOCTYPE html>
 <html>
@@ -60,18 +63,90 @@ function template_header($title) {
         <script type="text/javascript" src="https://cdn.datatables.net/rowreorder/1.3.1/js/dataTables.rowReorder.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/colreorder/1.6.1/js/dataTables.colReorder.min.js"></script>
         
-	</head>
-	<body>
+</head>
+<body>
 
-    <nav class="navtop">
-    	<div>
-    		<h1 style="cursor: pointer" onclick="window.location.href = '../index.php'">Umfragen</h1>
-            <a style="font-size: 15px;" href="../privacy/imprint.php"><i class="fas fa-info"></i>Impressum</a>
-            <a style="font-size: 15px;" href="../privacy/privacy.php"><i class="fas fa-info"></i>Datenschutz</a>
-            <a style="font-size: 15px;" href="../report.php"><i class="fas fa-exclamation-circle"></i>Fehler Melden</a>
-        </div>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-    </nav>
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav .icon {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .topnav a:not(:first-child) {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
+</style>
+</head>
+
+<div class="topnav" id="myTopnav">
+  <a href="../index.php" class="active">Startseite</a>
+  <a href="../privacy/imprint.php"><i class="fas fa-info"></i> Impressum</a>
+  <a href="../privacy/privacy.php"><i class="fas fa-info"></i> Datenschutz</a>
+  <a href="../report.php"><i class="fas fa-exclamation-circle"></i> Fehler Melden</a>
+  <a href="javascript:void(0);" class="icon" onclick="responsive()">
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
+
+<script>
+function responsive() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
+
+
 EOT;
 }
 

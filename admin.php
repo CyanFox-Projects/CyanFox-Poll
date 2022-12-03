@@ -43,7 +43,7 @@ if (isset($_GET['id'])) {
 
                             $stmt = $pdo->prepare("DELETE FROM poll_vote WHERE id = " . $_GET['userid'] . ";");
                             $stmt->execute([$_GET['id']]);
-                            header('Location: admin.php?id=' . $_GET['id'] . "&secret=" . $_GET['secret']);
+                            echo "<script>window.location.href = 'admin.php?id=" . $_GET['id'] . "&secret=" . $_GET['secret'] . ";</script>";
                         }
 
                         if (isset($_GET['delPoll'])) {
@@ -56,7 +56,7 @@ if (isset($_GET['id'])) {
                             $stmt = $pdo->prepare("DELETE FROM poll_vote WHERE poll_id = " . $_GET['id'] . ";");
                             $stmt->execute();
 
-                            header('Location: index.php');
+                            echo "<script>window.location.href = '../index.php';</script>";
                         }
                     }
                 }
@@ -71,7 +71,7 @@ if (isset($_GET['id'])) {
         return404();
     }
 } else {
-    exit('Keine ID gegeben. <a href="index.php">Startseite</a>');
+    return404();
 }
 ?>
 

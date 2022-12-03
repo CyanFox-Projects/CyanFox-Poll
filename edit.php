@@ -32,25 +32,25 @@ if (isset($_GET['id'])) {
 
                             $stmt = $pdo->prepare("UPDATE `polls` SET `title`='" . $_GET['title'] . "' WHERE id = ?");
                             $stmt->execute([$_GET['id']]);
-                            header('Location: edit.php?id=' . $_GET['id'] . '&secret=' . $_GET['secret']);
+                            echo '<script>window.location.href = "edit.php?id=' . $_GET['id'] . '&secret=' . $_GET['secret'] . '";</script>';
                         }
                         if (isset($_GET['description'])) {
 
                             $stmt = $pdo->prepare("UPDATE `polls` SET `description`='" . $_GET['description'] . "' WHERE id = ?");
                             $stmt->execute([$_GET['id']]);
-                            header('Location: edit.php?id=' . $_GET['id'] . '&secret=' . $_GET['secret']);
+                            echo '<script>window.location.href = "edit.php?id=' . $_GET['id'] . '&secret=' . $_GET['secret'] . '";</script>';
                         }
                         if (isset($_GET['admin'])) {
 
                             $stmt = $pdo->prepare("UPDATE `polls` SET `admin_id`='" . $_GET['admin'] . "' WHERE id = ?");
                             $stmt->execute([$_GET['id']]);
-                            header('Location: edit.php?id=' . $_GET['id'] . '&secret=' . $_GET['secret']);
+                            echo '<script>window.location.href = "edit.php?id=' . $_GET['id'] . '&secret=' . $_GET['secret'] . '";</script>';
                         }
                         if (isset($_GET['email'])) {
 
                             $stmt = $pdo->prepare("UPDATE `polls` SET `email`='" . $_GET['email'] . "' WHERE id = ?");
                             $stmt->execute([$_GET['id']]);
-                            header('Location: edit.php?id=' . $_GET['id'] . '&secret=' . $_GET['secret']);
+                            echo '<script>window.location.href = "edit.php?id=' . $_GET['id'] . '&secret=' . $_GET['secret'] . '";</script>';
                         }
                     }
                 }
@@ -76,7 +76,7 @@ if (isset($_GET['id'])) {
                             $stmt = $pdo->prepare("DELETE FROM poll_vote WHERE vote = '" . $_GET['poll_name'] . "' AND poll_id = " . $_GET['id'] . ";");
                             $stmt->execute([$_GET['id']]);
 
-                            header('Location: edit.php?id=' . $_GET['id'] . "&secret=" . $_GET['secret']);
+                            echo '<script>window.location.href = "edit.php?id=' . $_GET['id'] . '&secret=' . $_GET['secret'] . '";</script>';
                         }
 
                         if (isset($_GET['delPoll'])) {
@@ -88,7 +88,7 @@ if (isset($_GET['id'])) {
 
                             $stmt = $pdo->prepare("DELETE FROM poll_vote WHERE poll_id = " . $_GET['id'] . ";");
                             $stmt->execute([$_GET['id']]);
-                            header('Location: ../index.php');
+                            echo "<script>window.location.href = '../index.php';</script>";
                         }
                     }
                 }

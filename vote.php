@@ -62,13 +62,35 @@ Swal.fire({
                             $stmt->execute([$_GET['id']]);
                             $voter = $stmt->fetch(PDO::FETCH_ASSOC);
 
+                            if($poll['withmax'] == "true"){
+                                $stmt = $pdo->prepare('UPDATE poll_answers SET voted_votes = voted_votes + 1 WHERE title = "' . $value . '" AND poll_id = "' . $_GET['id'] . '"');
+                                $stmt->execute([$_GET['id']]);
+                            }
+
                             echo '<script>
 Swal.fire({
     title: "User ID",
     html: "Deine Delete-Key ist <b>' . $deleteKey . '</b>. Diesen brauchst du, wenn du deine Antwort löschen willst",
+    showDenyButton: true,
+    denyButtonColor: "#32a367",
+    confirmButtonText: "Ok",
+    denyButtonText: "Kopieren",
     icon: "info",
 }).then(function (e) {
-    document.location.href = "view.php?id=' . $_GET['id'] . '";
+    if (e.isConfirmed) {
+        window.location = "view.php?id=' . $_GET['id'] . '";
+    } else if (e.isDenied) {
+        navigator.clipboard.writeText("' . $deleteKey . '");
+        
+    Swal.fire({
+        title: "Kopiert",
+        html: "Der Code wurde in die Zwischenablage kopiert",
+        confirmButtonText: "Ok",
+        icon: "success",
+    }).then(function (e) {
+        window.location = "view.php?id=' . $_GET['id'] . '";
+    });
+    }
 });
 </script>';
                         }
