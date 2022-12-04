@@ -13,7 +13,8 @@ include 'assets/php/functions.php';
     function showChangeLog() {
         Swal.fire({
             title: 'Änderungsprotokoll',
-            html: '+ Multiple choice geht jetzt auch bei max. Antworten <br> + Rebase Backend <br> Sehe alles auf <a href="https://github.com/CyanFox-Projects/CyanFox-Poll">Github</a>',
+            html: '+ Multiple choice geht jetzt auch bei max. Antworten <br> + Rebase Backend <br>',
+            footer: '<a href="https://github.com/CyanFox-Projects/CyanFox-Poll">Github</a>',
             icon: 'info',
             confirmButtonText: 'Ok'
         });
@@ -33,7 +34,7 @@ include 'assets/php/functions.php';
 
     <div class="icon_div">
         <i class="fa-solid fa-clipboard-check icon"></i>
-        <input style="background-color: #31a364" type="submit" value="&nbsp;&nbsp; Änderungsprotokoll" class="changelog" onclick="showChangeLog()">
+        <input style="background-color: #31a364;" type="submit" value="&nbsp;&nbsp; Änderungsprotokoll" class="changelog" onclick="showChangeLog()">
     </div>
 
     <div class="icon_div">

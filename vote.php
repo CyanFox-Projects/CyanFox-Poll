@@ -38,8 +38,6 @@ if (isset($_GET['id'])) {
                         $stmt->execute([$_GET['id']]);
                         $poll_answer_votes = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                        echo '<script>console.log("' . $value . ' - Max votes = ' . $poll_answer_votes['max_votes'] . '")</script>';
-
                         if ($poll_answer_votes['voted_votes'] >= $poll_answer_votes['max_votes']) {
                             echo '<script>
 Swal.fire({

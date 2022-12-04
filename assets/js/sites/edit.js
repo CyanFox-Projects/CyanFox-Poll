@@ -12,7 +12,7 @@ $(document).ready(function () {
     });
 });
 
-function changeMax(poll_name) {
+function changeMax(poll_name, id, secret) {
 
     Swal.fire({
         title: 'Maximale Stimmen ändern',
@@ -33,7 +33,7 @@ function changeMax(poll_name) {
                 'Maximale Stimmen geändert.',
                 'success'
             ).then((result) => {
-                window.location.href = "edit.php?id=<?= $_GET['id'] ?>&secret=<?= $_GET['secret'] ?>&change_max=" + newMax + "&name=" + poll_name;
+                window.location.href = "edit.php?id=" + id + "&secret=" + secret + "&change_max=" + newMax + "&name=" + poll_name;
             })
         }
     })
@@ -147,7 +147,7 @@ function inputText(poll_id, secret, type) {
 }
 
 
-function confirmDelete() {
+function confirmDelete(id, secret) {
 
     Swal.fire({
         title: 'Umfrage löschen?',
@@ -165,7 +165,7 @@ function confirmDelete() {
                 'Die Umfrage wurde erfolgreich gelöscht.',
                 'success'
             ).then((result) => {
-                window.location.href = "./admin.php?id=<?= $_GET['id'] ?>&secret=<?= $_GET['secret'] ?>&del=true&delPoll=true";
+                window.location.href = "./edit.php?id=" + id + "&secret=" + secret + "&del=true&delPoll=true";
             })
         }
     })

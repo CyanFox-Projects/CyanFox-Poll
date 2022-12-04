@@ -22,12 +22,12 @@ if (isset($_GET['id'])) {
                 if (isset($_GET['change'])) {
                     if ($_GET['change'] == 'true') {
 
-                       /* if (isset($_GET['use_max_answers'])) {
+                        /* if (isset($_GET['use_max_answers'])) {
 
-                            $stmt = $pdo->prepare("UPDATE `polls` SET `withmax`='" . $_GET['use_max_answers'] . "' WHERE id = ?");
-                            $stmt->execute([$_GET['id']]);
-                            header('Location: edit.php?id=' . $_GET['id'] . '&secret=' . $_GET['secret']);
-                        }*/
+                             $stmt = $pdo->prepare("UPDATE `polls` SET `withmax`='" . $_GET['use_max_answers'] . "' WHERE id = ?");
+                             $stmt->execute([$_GET['id']]);
+                             header('Location: edit.php?id=' . $_GET['id'] . '&secret=' . $_GET['secret']);
+                         }*/
                         if (isset($_GET['title'])) {
 
                             $stmt = $pdo->prepare("UPDATE `polls` SET `title`='" . $_GET['title'] . "' WHERE id = ?");
@@ -81,13 +81,14 @@ if (isset($_GET['id'])) {
 
                         if (isset($_GET['delPoll'])) {
                             $stmt = $pdo->prepare("DELETE FROM polls WHERE id = " . $_GET['id'] . ";");
-                            $stmt->execute([$_GET['id']]);
+                            $stmt->execute();
 
                             $stmt = $pdo->prepare("DELETE FROM poll_answers WHERE poll_id = " . $_GET['id'] . ";");
-                            $stmt->execute([$_GET['id']]);
+                            $stmt->execute();
 
                             $stmt = $pdo->prepare("DELETE FROM poll_vote WHERE poll_id = " . $_GET['id'] . ";");
-                            $stmt->execute([$_GET['id']]);
+                            $stmt->execute();
+
                             echo "<script>window.location.href = '../index.php';</script>";
                         }
                     }
@@ -156,7 +157,7 @@ if (isset($_GET['id'])) {
     <br>
 
     <a href="#" <span title='Umfrage löschen'></span>
-    <i class='fas fa-trash-alt delete' onclick="confirmDelete()"></i></a>
+    <i class='fas fa-trash-alt delete' onclick="confirmDelete('<?= $_GET['id'] ?>', '<?= $_GET['secret'] ?>')"></i></a>
 
     <a href="admin.php?id=<?= $_GET['id'] ?>&secret=<?= $_GET['secret'] ?>" style="color: red">
         </span><strong>Administrationsseite der Umfrage: </strong></a>
@@ -231,8 +232,16 @@ if (isset($_GET['id'])) {
                     <thead>
                     <tr>
                         <th>Abstimmungs Name</th>
+
+                        <?php
+
+                        if ($poll['withmax'] == 'true') {
+                            echo "
                         <th>Insgesamte Stimmen</th>
-                        <th>Maximale Stimmen</th>
+                        <th>Maximale Stimmen</th>";
+                        }
+
+                        ?>
                         <th>Aktionen</th>
                     </tr>
                     </thead>
@@ -255,18 +264,25 @@ if (isset($_GET['id'])) {
                             $poll = $stmt->fetch(PDO::FETCH_ASSOC);
                             $edit_max = "";
 
-                            if($poll['withmax'] == "true"){
-                                $edit_max = "<a href='#' onclick='changeMax(`" . $poll_answer_votes['title'] . "`)' <i class='fas fa-pencil-alt' style='color: gray'></i></a>";
+                            if ($poll['withmax'] == "true") {
+                                $edit_max = "<a href='#' onclick='changeMax(`" . $poll_answer_votes['title'] . "`, `" . $_GET['id'] . "`, `" . $_GET['secret'] . "`)' <i class='fas fa-pencil-alt' style='color: gray'></i></a>";
                             }
-                            echo '
+                            if ($poll['withmax'] == "true") {
+                                echo '
 <tr>
 <th scope="row">' . $poll_answer['title'] . '<br></th>
 <th scope="row">' . $poll_answer_votes['voted_votes'] . '<br></th>
 <th scope="row">' . $poll_answer_votes['max_votes'] . '<br></th>
-
 <th scope="row">' . $del . ' ' . $edit_max . '<br></th>
 </tr>
 ';
+                            } else {
+                                echo '
+                                <tr>
+<th scope="row">' . $poll_answer['title'] . '<br></th>
+<th scope="row">' . $del . ' ' . $edit_max . '<br></th>
+</tr>';
+                            }
                         endforeach; ?>
                         </tbody>
                     </div>
