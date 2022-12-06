@@ -58,10 +58,6 @@ if (!empty($_POST)) {
                 $stmt->execute([$poll_id, $answer]);
             }
 
-            if(!$email == ""){
-                sendEmail($email, "Umfrage erstellt", "lenny@petschl.org", "Deine Umfrage wurde erstellt. Du kannst das Admin-Panel unter folgendem Link finden: https://petschl.org/poll/admin.php?id=" . $poll_id . "&secret=" . $admin);
-
-            }
             header("Location: admin.php?id=" . $poll_id . "&secret=" . $admin);
         }
 
