@@ -68,7 +68,7 @@ if (isset($_GET['id'])) {
                     $stmt = $pdo->prepare("DELETE FROM poll_vote WHERE deleteKey = '" . $_GET['deleteKey'] . "';");
                     $stmt->execute([$_GET['id']]);
 
-                    if($poll['withmax'] == "true"){
+                    if ($poll['withmax'] == "true") {
                         $stmt = $pdo->prepare('UPDATE poll_answers SET voted_votes = voted_votes - 1 WHERE poll_id = "' . $_GET['id'] . '"');
                         $stmt->execute([$_GET['id']]);
                     }
@@ -87,7 +87,6 @@ if (isset($_GET['id'])) {
     exit('Es wurde keine ID angegeben.');
 }
 ?>
-
 
 
 <meta http-equiv="refresh" content="60">
@@ -127,7 +126,7 @@ if (isset($_GET['id'])) {
     <a href="vote.php?id=<?= $_GET['id'] ?>" style="color: black">
         </span><strong>Öffentlicher Link zur Umfrage: </strong></a>
     <br>
-    <input type="text" class="userlink" onClick="this.select();"
+    <input style="width: 35%" type="text" class="userlink" onClick="this.select();"
            value="https://<?= $_SERVER['SERVER_NAME'] ?>/vote.php?id=<?= $_GET['id'] ?>">
 
     <div style="float: right;">
@@ -139,37 +138,33 @@ if (isset($_GET['id'])) {
     <br>
 
 
-    <div class="wrapper" id="wrapper" style="width: 2000px;">
+    <div class="poll-question">
+        <br>
 
-        <div class="poll-question">
-            <br>
+        <table id="table" class="display">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Abstimmung</th>
+            </tr>
+            </thead>
 
-            <table id="table" class="display" style="width:100%">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Abstimmung</th>
-                </tr>
-                </thead>
+            <tbody id="view_body">
 
-                <tbody id="view_body">
+            <?php foreach ($voters as $voter):
 
-                <?php foreach ($voters as $voter):
+                $stmt = $pdo->prepare('SELECT max_votes, voted_votes, title FROM poll_answers WHERE poll_id = ? AND title = "' . $voter['vote'] . '";');
+                $stmt->execute([$_GET['id']]);
+                $poll_answer_votes = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                    $stmt = $pdo->prepare('SELECT max_votes, voted_votes, title FROM poll_answers WHERE poll_id = ? AND title = "' . $voter['vote'] . '";');
-                    $stmt->execute([$_GET['id']]);
-                    $poll_answer_votes = $stmt->fetch(PDO::FETCH_ASSOC);
-
-                    echo '
+                echo '
 <tr>
 <th scope="row">' . $voter['name'] . '<br></th>
 <th scope="row">' . $voter['vote'] . '<br></th>
 </tr>
 ';
-                endforeach; ?>
-                </tbody>
-        </div>
-
+            endforeach; ?>
+            </tbody>
     </div>
 </div>
 

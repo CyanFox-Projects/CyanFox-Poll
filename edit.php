@@ -162,7 +162,7 @@ if (isset($_GET['id'])) {
     <a href="admin.php?id=<?= $_GET['id'] ?>&secret=<?= $_GET['secret'] ?>" style="color: red">
         </span><strong>Administrationsseite der Umfrage: </strong></a>
     <br>
-    <input type="text" class="adminlink" onClick="this.select();"
+    <input style="width: 50%" type="text" class="adminlink" onClick="this.select();"
            value="https://<?= $_SERVER['SERVER_NAME'] ?>/admin.php?id=<?= $_GET['id'] ?>&secret=<?= $_GET['secret'] ?>">
 
     <br>
@@ -171,7 +171,7 @@ if (isset($_GET['id'])) {
     <a href="vote.php?id=<?= $_GET['id'] ?>" style="color: black">
         </span><strong>Öffentlicher Link zur Umfrage: </strong></a>
     <br>
-    <input type="text" class="userlink" onClick="this.select();"
+    <input style="width: 35%" type="text" class="userlink" onClick="this.select();"
            value="https://<?= $_SERVER['SERVER_NAME'] ?>/vote.php?id=<?= $_GET['id'] ?>">
 
     <br>

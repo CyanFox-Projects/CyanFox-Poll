@@ -119,6 +119,9 @@ Swal.fire({
             [type="checkbox"] {
                 vertical-align: middle;
             }
+            body {
+                overflow-x: hidden;
+            }
         </style>
         <?php for ($i = 0; $i < count($poll_answers); $i++): ?>
 

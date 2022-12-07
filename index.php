@@ -13,7 +13,7 @@ include 'assets/php/functions.php';
     function showChangeLog() {
         Swal.fire({
             title: 'Änderungsprotokoll',
-            html: '+ Multiple choice geht jetzt auch bei max. Antworten <br> + Rebase Backend <br>',
+            html: '+ Multiple choice geht jetzt auch bei max. Antworten <br> * Etwas besseres Design für Handys <br>',
             footer: '<a href="https://github.com/CyanFox-Projects/CyanFox-Poll">Github</a>',
             icon: 'info',
             confirmButtonText: 'Ok'
