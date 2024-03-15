@@ -64,7 +64,7 @@ class CreatePoll extends Component
             'endDate' => 'required|date|after:today',
         ]);
 
-        if (config('captcha.disabled') === false) {
+        if (config('captcha.disable') === false) {
             $validator = Validator::make(['captcha' => $this->captcha], ['captcha' => 'required|captcha']);
 
             if ($validator->fails()) {
