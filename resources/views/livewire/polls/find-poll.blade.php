@@ -11,7 +11,7 @@
 
             <div class="divider mt-4"></div>
 
-            @if(config('captcha.disabled') === false)
+            @if(config('captcha.disable') === false)
                 <div class="gap-3 md:flex space-y-3">
                     <img src="{{ $captchaImg }}" alt="Captcha" class="h-20">
 
