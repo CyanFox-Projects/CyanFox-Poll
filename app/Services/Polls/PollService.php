@@ -53,10 +53,10 @@ class PollService
     /**
      * Retrieves an instance of the PollAnswersService class.
      *
-     * @param  $poll  PollAnswersService poll object for which the PollAnswersService instance is required.
+     * @param  $poll  Poll poll object for which the PollAnswersService instance is required.
      * @return PollAnswersService An instance of the PollAnswersService class.
      */
-    public function getPollAnswersManager(PollAnswersService $poll): PollAnswersService
+    public function getPollAnswersManager(Poll $poll): PollAnswersService
     {
         return new PollAnswersService($poll);
     }
