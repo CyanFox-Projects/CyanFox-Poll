@@ -28,6 +28,10 @@ jobs:
       - name: Test
         run: |
           cp .env.testing .env
+
+          curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+          /usr/local/bin/composer update --ignore-platform-req=ext-gd --ignore-platform-req=ext-intl --ignore-platform-req=ext-iconv
+
           ./docker/testing/bin/sail up -d
           docker exec cyanfox-poll-laravel.test-1 composer update
           docker exec cyanfox-poll-laravel.test-1 npm install
