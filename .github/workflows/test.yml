@@ -29,7 +29,7 @@ jobs:
         run: |
           cp .env.testing .env
           rm docker-compose.yml
-          cp docker-compose.testing.yml docker-compose.yml
+          cp docker-compose.test.yml docker-compose.yml
 
           curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
           /usr/local/bin/composer update --ignore-platform-req=ext-gd --ignore-platform-req=ext-intl --ignore-platform-req=ext-iconv
