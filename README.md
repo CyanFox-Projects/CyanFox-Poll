@@ -2,7 +2,7 @@
 
 ## Documentation
 
-You can find the documentation [here](https://docs.cyanfox.de/docs/cyanfox-poll). (Work in progress)
+You can find the documentation [here](https://docs.cyanfox.de/docs/cyanfox-poll).
 
 ## Support
 You can get support on the [Cyanfox Discord](https://discord.cyanfox.de).
