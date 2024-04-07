@@ -10,7 +10,7 @@
                 <div class="flex flex-col sm:flex-row gap-3 justify-center">
                     <a href="{{ route('polls.create') }}" class="btn btn-primary"><i
                                 class="icon-align-end-horizontal"></i> {{ __('sites/home.buttons.create_poll') }}</a>
-                    <a href="{{ route('polls.create') }}" class="btn btn-accent"><i
+                    <a href="{{ route('polls.find') }}" class="btn btn-accent"><i
                                 class="icon-search"></i> {{ __('sites/home.buttons.find_poll') }}</a>
                 </div>
             </div>

@@ -58,6 +58,8 @@ class AdminDashboard extends Component
             ->title(__('sites/poll.modals.add_answer.notifications.answer_added'))
             ->success()
             ->send();
+
+        $this->redirect(route('polls.admin', ['adminSecret' => $this->poll->admin_secret, 'tab' => $this->tab]), navigate: true);
     }
 
     public function deleteAnswer($answerIndex, $answerId): void
