@@ -98,13 +98,13 @@ class AddPollVote extends ModalComponent
             if ($answer->max_votes > $answer->votes) {
                 return [
                     'id' => $answer->id,
-                    'name' => $answer->title.' ('.$answer->votes.'/'.$answer->max_votes.' '.__('sites/poll.vote.votes').')',
+                    'name' => $answer->title.' ('.$answer->votes.'/'.$answer->max_votes.' '.__('sites/poll.votes').')',
                 ];
             }
 
             return [
                 'id' => $answer->id,
-                'name' => $answer->title.' ('.$answer->votes.'/'.$answer->max_votes.' '.__('sites/poll.vote.votes').')',
+                'name' => $answer->title.' ('.$answer->votes.'/'.$answer->max_votes.' '.__('sites/poll.votes').')',
                 'disabled' => true,
             ];
         });
