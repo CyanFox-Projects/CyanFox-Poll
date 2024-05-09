@@ -43,7 +43,7 @@ class PollVoteTable extends DataTableComponent
         $this->setConfigurableAreas([
             'toolbar-left-start' => [
                 'components.tables.polls.vote', [
-                    'viewSecret' => Poll::find($this->pollId)->view_secret,
+                    'poll' => Poll::find($this->pollId),
                 ],
             ],
         ]);

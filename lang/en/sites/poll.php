@@ -138,6 +138,7 @@ return [
     'vote' => [
         'title' => 'Vote | :title',
         'tab_title' => 'Polls » Vote :title',
+        'poll_ended' => 'This poll has ended',
 
         'notifications' => [
             'vote_added' => 'Vote added successfully',
