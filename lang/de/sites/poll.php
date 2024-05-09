@@ -138,6 +138,7 @@ return [
     'vote' => [
         'title' => 'Umfrage | :title',
         'tab_title' => 'Umfragen » :title',
+        'poll_ended' => 'Diese Umfrage ist beendet',
 
         'notifications' => [
             'vote_added' => 'Stimme erfolgreich hinzugefügt',
