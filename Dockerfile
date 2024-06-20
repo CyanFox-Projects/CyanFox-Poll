@@ -8,34 +8,32 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/v$DOCKERIZE_VERS
 
 # Install packages
 RUN apk --no-cache add \
-    php8 \
-    php8-fpm \
-    php8-opcache \
-    php8-gd \
-    php8-pdo_mysql \
-    php8-pdo_pgsql \
-    php8-pgsql \
-    php8-pcntl \
-    php8-exif \
-    php8-intl \
-    php8-openssl \
-    php8-zip \
-    php8-pecl-apcu \
-    php8-pecl-redis \
-    php8-common \
-    php8-iconv \
-    php8-json \
-    php8-mbstring \
-    php8-xml \
-    php8-bcmath \
-    php8-curl \
-    php8-ctype \
-    php8-dom \
+    php \
+    php-fpm \
+    php-opcache \
+    php-gd \
+    php-pdo_mysql \
+    php-pdo_pgsql \
+    php-pgsql \
+    php-pcntl \
+    php-exif \
+    php-intl \
+    php-openssl \
+    php-pecl-apcu \
+    php-pecl-redis \
+    php-common \
+    php-iconv \
+    php-json \
+    php-mbstring \
+    php-xml \
+    php-bcmath \
+    php-curl \
+    php-ctype \
+    php-dom \
     libpng-dev libjpeg-turbo-dev freetype-dev \
     composer \
     nodejs \
-    npm \
-    && ln -s /usr/bin/php8 /usr/bin/php
+    npm
 
 WORKDIR /usr/src/app
 
