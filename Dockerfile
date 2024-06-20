@@ -33,8 +33,14 @@ RUN apk --no-cache add \
     libpng-dev libjpeg-turbo-dev freetype-dev \
     composer \
     nodejs \
-    npm
+    npm \
+    nginx
+
+# Copy Nginx conf
+COPY docker/nginx.conf /etc/nginx/nginx.conf
 
 WORKDIR /usr/src/app
 
 RUN chown -R www-data:www-data .
+
+CMD ["sh", "-c", "php-fpm -D; nginx -g 'daemon off;'"]

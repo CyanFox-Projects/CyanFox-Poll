@@ -9,17 +9,8 @@ services:
     working_dir: /var/www
     volumes:
       - ./:/var/www
-
-  # Web Server
-  web:
-    build:
-      context: .
-      dockerfile: ./docker/nginx/Dockerfile
-    working_dir: /var/www
-    volumes:
-      - ./:/var/www
     ports:
-      - 80:80
+      - "8000:80"
 
   # MySQL
   db:
