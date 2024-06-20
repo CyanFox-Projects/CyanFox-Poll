@@ -4,7 +4,7 @@
     <img src="https://raw.githubusercontent.com/CyanFox-Projects/Data/main/Branding/Logos/Logo_Transparent.svg" alt="Logo" width="100" height="100">
   </a>
 
-<h3 align="center">CyanFox-Poll v3</h3>
+<h3 align="center">CyanFox-Poll</h3>
 
   <p align="center">
     A simple poll system.
