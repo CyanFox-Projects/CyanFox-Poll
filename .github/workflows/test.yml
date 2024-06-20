@@ -47,4 +47,5 @@ jobs:
         run: |
           cp .env.testing .env
 
+          php artisan migrate
           php artisan test
