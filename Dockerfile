@@ -1,49 +1,41 @@
-FROM php:8.2-fpm
+FROM php:8.2-fpm-alpine
 
 # Install Dockerize
-ENV DOCKERIZE_VERSION 0.6.1
+ENV DOCKERIZE_VERSION=0.6.1
+RUN wget https://github.com/jwilder/dockerize/releases/download/v$DOCKERIZE_VERSION/dockerize-alpine-linux-amd64-v$DOCKERIZE_VERSION.tar.gz \
+    && tar -C /usr/local/bin -xzvf dockerize-alpine-linux-amd64-v$DOCKERIZE_VERSION.tar.gz \
+    && rm dockerize-alpine-linux-amd64-v$DOCKERIZE_VERSION.tar.gz
 
-RUN curl -s -f -L -o /tmp/dockerize.tar.gz https://github.com/jwilder/dockerize/releases/download/v$DOCKERIZE_VERSION/dockerize-linux-amd64-v$DOCKERIZE_VERSION.tar.gz \
-    && tar -C /usr/local/bin -xzvf /tmp/dockerize.tar.gz \
-    && rm /tmp/dockerize.tar.gz
-
-# Install Composer
-ENV COMPOSER_VERSION 2.7.1
-
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=$COMPOSER_VERSION
-
-# Install nodejs
-RUN curl -fsSL https://deb.nodesource.com/setup_21.x | bash - &&\
-apt-get install -y nodejs
-
-# Install Dependencies
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        libz-dev \
-        libpq-dev \
-        libjpeg-dev \
-        libpng-dev \
-        libssl-dev \
-        libzip-dev \
-        unzip \
-        zip \
-        libicu-dev \
-        libfreetype6-dev \
-    && apt-get clean \
-    && docker-php-ext-configure gd --with-freetype=/usr/include/ \
-    && docker-php-ext-configure zip \
-    && docker-php-ext-configure intl \
-    && docker-php-ext-install \
-        gd \
-        exif \
-        opcache \
-        pdo_mysql \
-        pdo_pgsql \
-        pgsql \
-        pcntl \
-        zip \
-        intl \
-    && rm -rf /var/lib/apt/lists/*;
+# Install packages
+RUN apk --no-cache add \
+    php8 \
+    php8-fpm \
+    php8-opcache \
+    php8-gd \
+    php8-pdo_mysql \
+    php8-pdo_pgsql \
+    php8-pgsql \
+    php8-pcntl \
+    php8-exif \
+    php8-intl \
+    php8-openssl \
+    php8-zip \
+    php8-pecl-apcu \
+    php8-pecl-redis \
+    php8-common \
+    php8-iconv \
+    php8-json \
+    php8-mbstring \
+    php8-xml \
+    php8-bcmath \
+    php8-curl \
+    php8-ctype \
+    php8-dom \
+    libpng-dev libjpeg-turbo-dev freetype-dev \
+    composer \
+    nodejs \
+    npm \
+    && ln -s /usr/bin/php8 /usr/bin/php
 
 WORKDIR /usr/src/app
 

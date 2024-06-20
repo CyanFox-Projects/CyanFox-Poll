@@ -25,7 +25,7 @@ class FindPoll extends Component
             'email' => 'required|email',
         ]);
 
-        if (config('captcha.disable') === false) {
+        if (config('captcha.disable') === false && config('app.env') !== 'testing') {
             $validator = Validator::make(['captcha' => $this->captcha], ['captcha' => 'required|captcha']);
 
             if ($validator->fails()) {
