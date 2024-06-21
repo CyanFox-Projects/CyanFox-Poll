@@ -30,11 +30,21 @@ RUN apk --no-cache add \
     php-curl \
     php-ctype \
     php-dom \
+    php-tokenizer \
+    php-fileinfo \
+    php-xmlwriter \
+    php-xmlreader \
+    php-simplexml \
+    php-gd \
     libpng-dev libjpeg-turbo-dev freetype-dev \
     composer \
     nodejs \
     npm \
     nginx
+
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+
+RUN docker-php-ext-install gd pdo_mysql
 
 COPY docker/nginx.conf /etc/nginx/nginx.conf
 
