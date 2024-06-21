@@ -7,11 +7,11 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/v$DOCKERIZE_VERS
     && rm dockerize-alpine-linux-amd64-v$DOCKERIZE_VERSION.tar.gz
 
 # Install packages
+# Install dependencies
 RUN apk --no-cache add \
     php \
     php-fpm \
     php-opcache \
-    php-gd \
     php-pdo_mysql \
     php-pdo_pgsql \
     php-pgsql \
@@ -40,6 +40,10 @@ RUN apk --no-cache add \
     nodejs \
     npm \
     nginx
+
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+
+RUN docker-php-ext-install gd
 
 COPY . /usr/src/app
 WORKDIR /usr/src/app
