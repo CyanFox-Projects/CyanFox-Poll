@@ -35,6 +35,7 @@ RUN apk --no-cache add \
     php-xmlwriter \
     php-xmlreader \
     php-simplexml \
+    php-gd \
     libpng-dev libjpeg-turbo-dev freetype-dev \
     composer \
     nodejs \
