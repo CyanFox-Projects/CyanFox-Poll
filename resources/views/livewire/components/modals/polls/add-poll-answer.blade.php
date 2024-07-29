@@ -15,11 +15,11 @@
 
             <x-checkbox label="{{ __('sites/poll.modals.add_answer.unlimited_votes') }}"
                         class="checkbox checkbox-primary" wire:model="unlimitedVotes"
-                        hint="If checked, the answer has unlimited votes"/>
+                        hint="{{ __('sites/poll.modals.add_answer.unlimited_votes_hint') }}"/>
 
             <x-checkbox label="{{ __('sites/poll.modals.add_answer.use_custom_input') }}"
                         class="checkbox checkbox-primary" wire:model="useCustomInput"
-                        hint="If checked, the answer has a custom input field"/>
+                        hint="{{ __('sites/poll.modals.add_answer.custom_input_hint') }}"/>
         </div>
 
         <div class="divider"></div>

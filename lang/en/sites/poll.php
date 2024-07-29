@@ -58,7 +58,9 @@ return [
 
             'max_votes' => 'Max Votes',
             'unlimited_votes' => 'Unlimited Votes',
+            'unlimited_votes_hint' => 'If checked, the answer has unlimited votes',
             'use_custom_input' => 'Use Custom Input',
+            'custom_input_hint' => 'If checked, the answer has a custom input field',
 
             'notifications' => [
                 'answer_added' => 'Answer added successfully',

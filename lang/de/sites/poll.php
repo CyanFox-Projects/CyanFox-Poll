@@ -58,7 +58,9 @@ return [
 
             'max_votes' => 'Max. Stimmen',
             'unlimited_votes' => 'Unbegrenzte Stimmen',
+            'unlimited_votes_hint' => 'Wenn angekreuzt, hat die Antwort unbegrenzt viele Stimmen',
             'use_custom_input' => 'Benutzerdefinierte Eingabe verwenden',
+            'custom_input_hint' => 'Wenn angekreuzt, kann die Antwort eine benutzerdefinierte Eingabe haben',
 
             'notifications' => [
                 'answer_added' => 'Antwort erfolgreich hinzugefügt',
