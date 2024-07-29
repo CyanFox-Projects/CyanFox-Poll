@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(UrlGenerator $url): void
     {
-        if(env('ENFORCE_SSL', false)) {
+        if (env('ENFORCE_SSL', false)) {
             $url->forceScheme('https');
         }
     }
