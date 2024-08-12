@@ -9273,16 +9273,16 @@
         },
         {
             "name": "knuckleswtf/scribe",
-            "version": "4.36.0",
+            "version": "4.37.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/knuckleswtf/scribe.git",
-                "reference": "1304e1503600b1fe8f6f546445de0ebd927386fa"
+                "reference": "5eb0f65973db9df5ba455f8bbcc8a1cd6573564b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/knuckleswtf/scribe/zipball/1304e1503600b1fe8f6f546445de0ebd927386fa",
-                "reference": "1304e1503600b1fe8f6f546445de0ebd927386fa",
+                "url": "https://api.github.com/repos/knuckleswtf/scribe/zipball/5eb0f65973db9df5ba455f8bbcc8a1cd6573564b",
+                "reference": "5eb0f65973db9df5ba455f8bbcc8a1cd6573564b",
                 "shasum": ""
             },
             "require": {
@@ -9356,7 +9356,7 @@
             ],
             "support": {
                 "issues": "https://github.com/knuckleswtf/scribe/issues",
-                "source": "https://github.com/knuckleswtf/scribe/tree/4.36.0"
+                "source": "https://github.com/knuckleswtf/scribe/tree/4.37.1"
             },
             "funding": [
                 {
@@ -9364,7 +9364,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2024-05-27T21:51:57+00:00"
+            "time": "2024-07-11T13:57:05+00:00"
         },
         {
             "name": "laravel/pint",
@@ -11951,16 +11951,16 @@
         },
         {
             "name": "symfony/var-exporter",
-            "version": "v7.1.1",
+            "version": "v7.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-exporter.git",
-                "reference": "db82c2b73b88734557cfc30e3270d83fa651b712"
+                "reference": "b80a669a2264609f07f1667f891dbfca25eba44c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-exporter/zipball/db82c2b73b88734557cfc30e3270d83fa651b712",
-                "reference": "db82c2b73b88734557cfc30e3270d83fa651b712",
+                "url": "https://api.github.com/repos/symfony/var-exporter/zipball/b80a669a2264609f07f1667f891dbfca25eba44c",
+                "reference": "b80a669a2264609f07f1667f891dbfca25eba44c",
                 "shasum": ""
             },
             "require": {
@@ -12007,7 +12007,7 @@
                 "serialize"
             ],
             "support": {
-                "source": "https://github.com/symfony/var-exporter/tree/v7.1.1"
+                "source": "https://github.com/symfony/var-exporter/tree/v7.1.2"
             },
             "funding": [
                 {
@@ -12023,7 +12023,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-31T14:57:53+00:00"
+            "time": "2024-06-28T08:00:31+00:00"
         },
         {
             "name": "symfony/yaml",
