@@ -19,6 +19,6 @@
     "dependencies": {
         "bootstrap-icons": "^1.11.3",
         "choices.js": "^10.2.0",
-        "lucide-static": "^0.428.0"
+        "lucide-static": "^0.436.0"
     }
 }
