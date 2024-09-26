@@ -57,8 +57,9 @@ class PollAdminVoteTable extends DataTableComponent
                     return rtrim($formattedString, ', ');
                 })->html(),
             Column::make(__('messages.table.created_at'), 'created_at')
-                ->sortable(),
-            Column::make(__('messages.table.updated_at'), 'updated_at')
+                ->format(function ($value) {
+                    return $value->format('d.m.Y H:i');
+                })
                 ->sortable(),
             Column::make(__('messages.table.actions'))
                 ->label(function ($row) {

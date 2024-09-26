@@ -3,10 +3,9 @@
         <header class="footer-title">{{ __('navigation.footer.links') }}</header>
         <a class="link link-hover" href="https://github.com/CyanFox-Projects"><i class="bi bi-github"></i>
             {{ __('navigation.footer.github') }}</a>
-        <a class="link link-hover" href="https://docs.cyanfox.de"><i class="icon-book"></i>
-            {{ __('navigation.footer.documentation') }}</a>
-        <a class="link link-hover" href="https://discord.cyanfox.de"><i
-                class="bi bi-discord"></i> {{ __('navigation.footer.discord') }}</a>
+
+        <a class="link link-hover" href="https://cyanfox.de"><i class="icon-globe"></i>
+            {{ __('navigation.footer.website') }}</a>
     </nav>
 
     @if(config('legal.impress') !== null && config('legal.privacy') !== null)
@@ -14,12 +13,12 @@
             <header class="footer-title">{{ __('navigation.footer.legal') }}</header>
 
             @if(config('legal.impress') !== null)
-                <a class="link link-hover" href="{{ route('impress') }}"><i
+                <a class="link link-hover" href="{{ route('impress') }}" wire:navigate><i
                         class="icon-badge-info"></i> {{ __('navigation.footer.impress') }}</a>
             @endif
 
             @if(config('legal.privacy') !== null)
-                <a class="link link-hover" href="{{ route('privacy') }}"><i
+                <a class="link link-hover" href="{{ route('privacy') }}" wire:navigate><i
                         class="icon-badge-info"></i> {{ __('navigation.footer.privacy') }}</a>
             @endif
         </nav>

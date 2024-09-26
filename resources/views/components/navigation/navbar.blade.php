@@ -1,6 +1,6 @@
 <div class="navbar bg-base-200">
     <div class="navbar-start space-x-4">
-        <a href="{{ route('home') }}" class="hover:text-gray-600"><img src="{{ asset('img/Logo.svg') }}" alt="Logo"
+        <a href="{{ route('home') }}" wire:navigate><img src="{{ asset('img/Logo.svg') }}" alt="Logo"
                                                                        class="w-16 h-16"></a>
         <a href="{{ route('polls.create') }}" class="hover:text-gray-600 sm:block hidden" wire:navigate><i
                 class="icon-align-end-horizontal"></i> {{ __('navigation.navbar.create_poll') }}</a>
