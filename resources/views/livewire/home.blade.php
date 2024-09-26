@@ -8,10 +8,10 @@
                     <div class="md:whitespace-pre sm:whitespace-normal sm:overflow-wrap sm:break-word" id="text"></div>
                 </div>
                 <div class="flex flex-col sm:flex-row gap-3 justify-center">
-                    <a href="{{ route('polls.create') }}" class="btn btn-primary"><i
-                                class="icon-align-end-horizontal"></i> {{ __('sites/home.buttons.create_poll') }}</a>
-                    <a href="{{ route('polls.find') }}" class="btn btn-accent"><i
-                                class="icon-search"></i> {{ __('sites/home.buttons.find_poll') }}</a>
+                    <a href="{{ route('polls.create') }}" class="btn btn-primary" wire:navigate><i
+                            class="icon-align-end-horizontal"></i> {{ __('sites/home.buttons.create_poll') }}</a>
+                    <a href="{{ route('polls.find') }}" class="btn btn-accent" wire:navigate><i
+                            class="icon-search"></i> {{ __('sites/home.buttons.find_poll') }}</a>
                 </div>
             </div>
         </div>
@@ -55,7 +55,7 @@
                     <p class="mb-5">{!! __('sites/home.open_source.content') !!}</p>
                     <div class="flex flex-col sm:flex-row gap-3 justify-center">
                         <a href="https://github.com/CyanFox-Projects/CyanFox-Poll" class="btn btn-neutral"><i
-                                    class="bi bi-github"></i> {{ __('sites/home.buttons.github') }}</a>
+                                class="bi bi-github"></i> {{ __('sites/home.buttons.github') }}</a>
                     </div>
                 </div>
             </div>
@@ -63,34 +63,30 @@
     </section>
 
     <script src="{{ asset('js/dist/typed.min.js') }}"></script>
+    @script
     <script>
-        function generateGradient() {
-            const hexValues = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e"];
+        const hexValues = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e"];
 
-            function populate(a) {
-                for (let i = 0; i < 6; i++) {
-                    const x = Math.round(Math.random() * 14);
-                    const y = hexValues[x];
-                    a += y;
-                }
-                return a;
+        function populate(a) {
+            for (let i = 0; i < 6; i++) {
+                const x = Math.round(Math.random() * 14);
+                const y = hexValues[x];
+                a += y;
             }
-
-            const newColor1 = populate('#');
-            const newColor2 = populate('#');
-            const newColor3 = populate('#');
-            const newColor4 = populate('#');
-            const angle = Math.round(Math.random() * 360);
-
-            const mainHero = document.getElementById('mainHero');
-            mainHero.style.background = `linear-gradient(${angle}deg, ${newColor1}, ${newColor2}, ${newColor3}, ${newColor4})`;
-            mainHero.style.backgroundSize = '400% 400%';
-            mainHero.style.animation = 'gradient 15s ease infinite';
+            return a;
         }
 
-        document.addEventListener('DOMContentLoaded', function () {
-            generateGradient();
-        });
+        const newColor1 = populate('#');
+        const newColor2 = populate('#');
+        const newColor3 = populate('#');
+        const newColor4 = populate('#');
+        const angle = Math.round(Math.random() * 360);
+
+        const mainHero = document.getElementById('mainHero');
+        mainHero.style.background = `linear-gradient(${angle}deg, ${newColor1}, ${newColor2}, ${newColor3}, ${newColor4})`;
+        mainHero.style.backgroundSize = '400% 400%';
+        mainHero.style.animation = 'gradient 15s ease infinite';
+
 
         new Typed("#text", {
             strings: ["", "{{ __('sites/home.animations.1') }}",
@@ -102,6 +98,7 @@
             loop: true,
         });
     </script>
+    @endscript
     <style>
         #mainHero {
             background-size: 400% 400%;
@@ -109,9 +106,15 @@
         }
 
         @keyframes gradient {
-            0% {background-position: 0% 50%;}
-            50% {background-position: 100% 50%;}
-            100% {background-position: 0% 50%;}
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         html {
